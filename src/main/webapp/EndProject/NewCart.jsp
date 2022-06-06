@@ -284,10 +284,11 @@
     	console.log(data[0]);
     	console.log(data[0].productName);
     	console.log(data[0].productDesc);
+		console.log(data[0].productImg1);
 
 		$("#headReplace1").html(data[0].productName);
 		$("#price1").html(data[0].productPrice);
-		$('#product-zoom').attr("src", data[0].productImg1);
+		$('#picture1').attr("src", data[0].productImg1);
 
     </script>
 
