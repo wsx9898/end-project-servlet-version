@@ -89,18 +89,19 @@
 							<tbody id="putHere">
 								<tr class="classItem1" id="item1">
 									<td class="image"><a class="product-image"
-										title="Sample Product" href="#/women-s-crepe-printed-black/"><img
+										title="Sample Product" href="以後在連回商品頁"><img
 											width="75" alt="Sample Product"
-											src="products-images/product1.jpg"></a></td>
+											src="圖片要被取代" id="picture1"></a></td>
 									<td>
 										<h2 class="product-name">
-											<a href="#/women-s-crepe-printed-black/">測試產品</a>
+											<a href="#/women-s-crepe-printed-black/" id="headReplace1">標題這邊要被取代1</a>
 										</h2>
 									</td>
 									<td class="a-center"><a title="Edit item parameters"
 										class="edit-bnt" href="#configure/id/15945/"></a></td>
 									<td class="a-right"><span class="cart-price"><span
-											class="price" id="price1">$70.00</span></span></td>
+											class="price">$</span><span
+											class="price" id="price1">70.00價錢這邊要被取代1</span></span></td>
 
 									<!-- 改變增加商品按鈕在這邊開始 -->
 									<td class="a-center movewishlist qty-middle">
@@ -123,21 +124,22 @@
 
 								<tr class="classItem2" id="item2">
 									<td class="image"><a class="product-image"
-										title="Sample Product" href="#women-s-u-tank-top/"><img
+										title="Sample Product" href="#以後在連回商品頁"><img
 											width="75" alt="Sample Product"
-											src="products-images/product4.jpg"></a></td>
+											src="圖片要被取代2" id="picture2"></a></td>
 									<td>
 										<h2 class="product-name">
-											<a href="#women-s-u-tank-top/">測試產品</a>
+											<a href="#women-s-u-tank-top/" id="headReplace2">標題這邊要被取代2</a>
 										</h2>
 									</td>
 									<td class="a-center"><a title="Edit item parameters"
 										class="edit-bnt" href="#configure/id/15946/"></a></td>
 									<td class="a-right"><span class="cart-price"><span
-											class="price" id='price2'>$100</span></span></td>
+											class="price" >$</span><span
+											class="price" id='price2'>100價錢這邊要被取代2</span></span></td>
 									<!-- 改變增加商品按鈕在這邊開始 -->
 									<td class="a-center movewishlist qty-middle">
-										<form id='myform' method='POST' action='#'>
+										<form id='myform2' method='POST' action='#'>
 											<input type='button' value='-'
 												class='qtyminus btn btn-success' field='quantity2'
 												onclick='minus("quantity2")' /> <input type='text'
@@ -157,21 +159,22 @@
 
 								<tr class="classItem3" id="item3">
 									<td class="image"><a class="product-image"
-										title="Sample Product" href="#women-s-u-tank-top/"><img
+										title="Sample Product" href="#以後在連回商品頁"><img
 											width="75" alt="Sample Product"
-											src="products-images/product10.jpg"></a></td>
+											src="圖片要被取代3" id="picture3"></a></td>
 									<td>
 										<h2 class="product-name">
-											<a href="#women-s-u-tank-top/">測試產品</a>
+											<a href="#women-s-u-tank-top/" id="headReplace3">標題這邊要被取代3</a>
 										</h2>
 									</td>
 									<td class="a-center"><a title="Edit item parameters"
 										class="edit-bnt" href="#configure/id/15946/"></a></td>
 									<td class="a-right"><span class="cart-price"><span
-											class="price" id='price3'>$130</span></span></td>
+											class="price">$</span><span
+											class="price" id='price3'>130價錢這邊要被取代3</span></span></td>
 									<!-- 改變增加商品按鈕在這邊開始 -->
 									<td class="a-center movewishlist qty-middle">
-										<form id='myform' method='POST' action='#'>
+										<form id='myform3' method='POST' action='#'>
 											<input type='button' value='-'
 												class='qtyminus btn btn-success' field='quantity3'
 												onclick='minus("quantity3")' /> <input type='text'
@@ -201,7 +204,7 @@
 		</div>
 
 
-		<!-- Ted的 -->
+		<!-- Ted用JSP顯示的方法 -->
 		<c:if test="${not empty cart}">
 			<div class="border border-2 border-info">
 				<table class="table table-success table-hover table-striped w-100">
@@ -232,7 +235,7 @@
 				</table>
 			</div>
 		</c:if>
-
+		<!-- Ted用JSP顯示的方法 -->
 
 	</div>
 	</div>
@@ -276,14 +279,16 @@
     
 	    //parse之後
     	var productList = '${cart}';//Ted有改寫bean的toString會印出JSON字串
-    	var kevinCart = JSON.parse(productList);//parse之後
-    	kevinCart[0];//第一個物品
-    	console.log(kevinCart[0]);
-    	console.log(kevinCart[0].productName);
-    	console.log(kevinCart[0].productDesc);
-    	kevinCart[1];
-    
-    
+    	var data = JSON.parse(productList);//parse之後
+    	data[0];//第一個物品
+    	console.log(data[0]);
+    	console.log(data[0].productName);
+    	console.log(data[0].productDesc);
+
+		$("#headReplace1").html(data[0].productName);
+		$("#price1").html(data[0].productPrice);
+		$('#product-zoom').attr("src", data[0].productImg1);
+
     </script>
 
 
