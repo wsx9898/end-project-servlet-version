@@ -927,7 +927,7 @@
 
     //Ted的方法，透過遠端載入所有圖片跟標題
     var settings = {
-        "url": "http://bosian.ddns.net:8080/IIIFinalServlet_war_exploded/ProductServlet?pdaction=Select1&editProductId=85",
+        "url": "http://bosian.ddns.net:8080/IIIFinalServlet_war_exploded/ProductServlet?pdaction=Select1&editProductId=2",
         "method": "POST",
         "timeout": 0,
     };

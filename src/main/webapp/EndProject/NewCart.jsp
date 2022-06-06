@@ -205,36 +205,36 @@
 
 
 		<!-- Ted用JSP顯示的方法 -->
-		<c:if test="${not empty cart}">
-			<div class="border border-2 border-info">
-				<table class="table table-success table-hover table-striped w-100">
-					<thead>
-						<tr>
-							<th scope="col">產品名稱</th>
-							<th scope="col">產品類別</th>
-							<th scope="col">產品價格</th>
-							<th scope="col"></th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="row" items="${cart}">
-							<tr>
-								<td>${row.productName }</td>
-								<td>${row.productCatalog }</td>
-								<td>${row.productPrice }</td>
-								<td><img src="${row.productImg1 }" alt=""
-									style="width: 120px"></td>
-								<td>
-									<button onclick="removeProductFromCart(${row.productId})">移除</button>
-								</td>
-							</tr>
-						</c:forEach>
-						<!-- Ted的 -->
-					</tbody>
-				</table>
-			</div>
-		</c:if>
+<%--		<c:if test="${not empty cart}">--%>
+<%--			<div class="border border-2 border-info">--%>
+<%--				<table class="table table-success table-hover table-striped w-100">--%>
+<%--					<thead>--%>
+<%--						<tr>--%>
+<%--							<th scope="col">產品名稱</th>--%>
+<%--							<th scope="col">產品類別</th>--%>
+<%--							<th scope="col">產品價格</th>--%>
+<%--							<th scope="col"></th>--%>
+<%--							<th scope="col"></th>--%>
+<%--						</tr>--%>
+<%--					</thead>--%>
+<%--					<tbody>--%>
+<%--						<c:forEach var="row" items="${cart}">--%>
+<%--							<tr>--%>
+<%--								<td>${row.productName }</td>--%>
+<%--								<td>${row.productCatalog }</td>--%>
+<%--								<td>${row.productPrice }</td>--%>
+<%--								<td><img src="${row.productImg1 }" alt=""--%>
+<%--									style="width: 120px"></td>--%>
+<%--								<td>--%>
+<%--									<button onclick="removeProductFromCart(${row.productId})">移除</button>--%>
+<%--								</td>--%>
+<%--							</tr>--%>
+<%--						</c:forEach>--%>
+<%--						<!-- Ted的 -->--%>
+<%--					</tbody>--%>
+<%--				</table>--%>
+<%--			</div>--%>
+<%--		</c:if>--%>
 		<!-- Ted用JSP顯示的方法 -->
 
 	</div>
@@ -280,15 +280,33 @@
 	    //parse之後
     	var productList = '${cart}';//Ted有改寫bean的toString會印出JSON字串
     	var data = JSON.parse(productList);//parse之後
-    	data[0];//第一個物品
-    	console.log(data[0]);
+
+    	console.log(data[0]);//第一個物品
     	console.log(data[0].productName);
     	console.log(data[0].productDesc);
 		console.log(data[0].productImg1);
-
 		$("#headReplace1").html(data[0].productName);
 		$("#price1").html(data[0].productPrice);
 		$('#picture1').attr("src", data[0].productImg1);
+
+
+		console.log(data[1]);//第二個物品
+		console.log(data[1].productName);
+		console.log(data[1].productDesc);
+		console.log(data[1].productImg1);
+		$("#headReplace2").html(data[1].productName);
+		$("#price2").html(data[1].productPrice);
+		$('#picture2').attr("src", data[1].productImg1);
+
+		console.log(data[2]);//第三個物品
+		console.log(data[2].productName);
+		console.log(data[2].productDesc);
+		console.log(data[2].productImg1);
+		$("#headReplace3").html(data[2].productName);
+		$("#price3").html(data[2].productPrice);
+		$('#picture3').attr("src", data[2].productImg1);
+
+
 
     </script>
 
