@@ -46,7 +46,7 @@ public class MemberFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 //接收資料
-		String wefweiocjw = "wec";
+		String kevinTest = "tests";
 		String memberIdTemp = request.getParameter("memberId");
 		String memberAccouuntTemp = request.getParameter("memberAccouunt");
 		String memberPasswordTemp = request.getParameter("memberPassword");
