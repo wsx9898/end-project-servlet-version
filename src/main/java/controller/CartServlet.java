@@ -124,7 +124,7 @@ public class CartServlet extends HttpServlet {
             String result2 = (String)request.getSession().getAttribute("qty");
             if(result!=null){
                 out.println(result);
-                out.print("\"qty\" :"+ "\""+result2+"\"");
+                out.print("{\" qty\" :"+ "\"" +result2+ "\"" +"}");
                 out.close();
             }else{
                 out.print("CharIsEmpty");

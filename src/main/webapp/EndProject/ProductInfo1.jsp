@@ -991,7 +991,7 @@
                 alert(res);
                 //這是Ted購物車上面會顯示數量
                 var qtyOfCart = response.toString().substring(7, 8);
-                cartTotal(qtyOfCart);
+                console.log(qtyOfCart);
             },
             error: function () {
                 alert("cart error");
