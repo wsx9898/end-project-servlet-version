@@ -254,21 +254,22 @@
 
 
 	<script type="text/javascript">
-
+		CartCheckOut();
 
 		//一開始就跟servlet要求新增的購物車了
 	    function CartCheckOut() {
 	        $.ajax({
-	            url: "CartServlet",
+	            url: "http://localhost:8080/labweb_register_0605_test_war/CartServlet",
 	            method: "post",
 	            data: {
-	                pdaction: "cartCheckOut",
+	                pdaction: "cartCheckOut2",
 	            },
 	            success: function (res) {
 	                if(res==="CharIsEmpty"){
 	                    alert("目前購物車內沒有商品")
 	                }else{
-	                    window.location.href = "checkout.jsp";
+	                    console.log(res);
+						alert(res);
 	                }
 	            },
 	            error: function () {

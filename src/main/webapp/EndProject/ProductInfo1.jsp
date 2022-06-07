@@ -978,12 +978,13 @@
         $.ajax({
             //照理說不用http://localhost:8080/labweb_register_0605_test_war/這行
             //但是如果只有CartServlet會報錯在瀏覽器
-            //POST http://localhost:8080/labweb_register_0605_test_war/EndProject/CartServlet
+            //POST "http://localhost:8080/labweb_register_0605_test_war/CartServlet"
             url: "http://localhost:8080/labweb_register_0605_test_war/CartServlet",
             method: "post",
             data: {
                 pdaction: "addToCart",
-                editProductId: pid
+                editProductId: pid,
+                qty:"66666"
             },
             success: function (response) {
                 let res = response.toString().substring(0, 7);

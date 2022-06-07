@@ -47,6 +47,10 @@ public class CartServlet extends HttpServlet {
         var pdaction = request.getParameter("pdaction");
         System.out.println(pdaction + " from cartServlet " + pid0);
 
+        //自己測試數量
+        var qty = request.getParameter("qty");
+        System.out.println("qty=" + qty);
+
         //驗證資料
         Map<String, String> errors = new HashMap<>();
         request.setAttribute("errors", errors);
@@ -75,8 +79,16 @@ public class CartServlet extends HttpServlet {
                 request.getSession().removeAttribute("cart"); //把舊有的購物車session移除
                 request.getSession().setAttribute("cart",temp); //把新的list存回購物車session
                 totalQTYinCart = temp.size();
+
+                //賦予數量
+                request.getSession().removeAttribute("qty"); //把舊有的購物車session移除
+                request.getSession().setAttribute("qty",qty); //把新的list存回購物車session
             }else{
                 request.getSession().setAttribute("cart", result); //如果購物車session不存在 就直接new一個session把list存進去
+
+                //賦予數量
+                request.getSession().removeAttribute("qty"); //把舊有的購物車session移除
+                request.getSession().setAttribute("qty",qty); //把新的list存回購物車session
                 totalQTYinCart = result.size();
             }
             out.print("購物車新增成功"+totalQTYinCart);
@@ -102,6 +114,18 @@ public class CartServlet extends HttpServlet {
                 //list forward結帳頁面 redirect到結帳頁面
                 request.setAttribute("cart", result);
                 request.getRequestDispatcher("EndProject/NewCart.jsp").forward(request, response);
+            }else{
+                out.print("CharIsEmpty");
+                out.close();
+            }
+        }else if (pdaction != null && pdaction.equals("cartCheckOut2")) {
+            //把購物車清單從session cart抓出來
+            List<ProductBean> result = (List<ProductBean>) request.getSession().getAttribute("cart");
+            String result2 = (String)request.getSession().getAttribute("qty");
+            if(result!=null){
+                out.println(result);
+                out.print("\"qty\" :"+ "\""+result2+"\"");
+                out.close();
             }else{
                 out.print("CharIsEmpty");
                 out.close();
