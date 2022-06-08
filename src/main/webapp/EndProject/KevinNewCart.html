@@ -146,7 +146,7 @@
 						console.log(e.productName);
 						console.log(e.productPrice);
 
-						appendItem123();
+						appendItem123(e.productName,e.productPrice,e.productImg,e.qty);
 					})
 				}
 			},
@@ -156,34 +156,33 @@
 		});
 	}
 
-	function appendItem123(){
+	function appendItem123(productName,productPrice,productImg,qty){
 		console.log("ItemCnt = " + ItemCnt);
 		//用這個到時候可以判斷是哪個物品要新增
 		$("#putHere").append(
-				`<tr class="classItem${ItemCnt}" id="item${ItemCnt}"><td class="image"><a class="product-image" title="Sample Product"
-        href="#/women-s-crepe-printed-black/"><img width="75" alt="Sample Product" src="products-images/product1.jpg"></a></td></tr>`
+				`<tr class="classItem${ItemCnt}" id="item${ItemCnt}"><td class="image"><a class="product-image"
+        href="#/women-s-crepe-printed-black/"><img width="75" alt="Sample Product" src="${productImg}"></a></td></tr>`
 		);
 		//表示id是有加上去成功的
 		$(`#item${ItemCnt}`).append(
-				'<td><h2 class="product-name"><a href="#/women-s-crepe-printed-black/">測試產品</a></h2></td>'
+				`<td><h2 class="product-name"><a href="#/women-s-crepe-printed-black/">${productName}</a></h2></td>`
 		);
 
 		$(`#item${ItemCnt}`).append(
 				`<td class="a-center"><a title="Edit item parameters" class="edit-bnt"
          href="#configure/id/15945/"></a></td><td class="a-right"><span class="cart-price">
-         <span class="price" id="price${ItemCnt}">$70.00</span></span></td>`
+         <span class="price"">$</span><span class="price" id="price${ItemCnt}">${productPrice}</span></span></td>`
 		);
 
 		$(`#item${ItemCnt}`).append(
 				`<td class="a-center movewishlist qty-middle">
             <form id='myform' method='POST' action='#'>
               <input type='button'value='-' class='qtyminus btn btn-success' field='quantity${ItemCnt}' onclick='minus("quantity${ItemCnt}")' />
-              <input type='text' name='quantity${ItemCnt}' value='0' class=' qty' id='quantity${ItemCnt}' />
+              <input type='text' name='quantity${ItemCnt}' value="${qty}" class='qty' id='quantity${ItemCnt}' />
               <input type='button' value='+' class='qtyplus btn btn-success' field='quantity${ItemCnt}' onclick='plus("quantity${ItemCnt}")' />
             </form>
         </td>`
 		);
-
 		//
 		$(`#item${ItemCnt}`).append(
 				`<td class="a-right movewishlist"><span class="cart-price"><span class="price"id="totalPrice${ItemCnt}">$0</span></span></td>`
@@ -195,55 +194,6 @@
 		);
 		ItemCnt++;
 	}
-
-
-
-	//之後要塞資料
-	// data[0].productName;
-	// data[0].qty;
-	// data[0].productImg;
-	// data[0].productPrice;
-	// $("#headReplace1").html(data[0].productName);
-	// $("#price1").html(data[0].productPrice);
-	// $('#picture1').attr("src", data[0].productImg1);
-	//之後要塞資料
-
-	//Ted產生購物欄位
-	// $(function () {
-	// 	$.ajax({
-	// 		url: "CartServlet",
-	// 		method: "get",
-	// 		data: {
-	// 			pdaction: "cartCheckOut2"
-	// 		},
-	// 		success: function (resp) {
-	// 			productList = JSON.parse(resp);
-	// 			let str = '';
-	// 			let totalprice = 0;
-	// 			productList.forEach(function (e) {
-	// 				totalprice = totalprice + e.單項總額
-	// 				str = str +
-	// 						`<tr>
-	//                 <td>` + e.productName + `</td>
-	//                 <td><img src="` + e.productImg + `" width="120" /></td>
-	//                 <td>` + e.productPrice + `</td>
-	//                 <td>` + <button onclick="return addProductToCart(
-	//                       + e.productId + );">+</button>
-	// 						+ e.qty + <button onclick="return addProductToCart(
-	//                       + e.productId + );">-</button> + `</td>
-	//                 <td>` + e.單項總額 + `</td>
-	//                 <td><button onclick="return deleteProductItemConfirm(` + e.productId + `);">刪除品項</button></td>
-	//                 </tr>`
-	// 			})
-	// 			$('#test0608').html(str);
-	// 			$('#totalpricehtml').text(totalprice);
-	// 		},
-	// 		error: function (resp) {
-	// 			console.log(resp);
-	// 		}
-	// 	})
-	// })
-	//Ted產生購物欄位
 </script>
 
 
