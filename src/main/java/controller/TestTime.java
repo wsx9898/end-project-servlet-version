@@ -1,29 +1,30 @@
 package controller;
 
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class TestTime {
 	public static void main(String[] args) {
-		SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+		LinkedList<String> qtyList = new LinkedList<String>();
+		qtyList.add("123");
+		qtyList.add("456");
+		System.out.println(qtyList);
 
-//		System.out.println(sFormat);
-//		System.out.println();
-		System.out.println(Calendar.getInstance().getTime());
 
-//		java.util.Date createDate = null;
-//		try {
-//			createDate = sFormat.parse(timeStamp);
-//			System.out.println(createDate);
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			System.out.println(e);
-//		}
+		HashMap qtyMap = new HashMap();
+		qtyMap.put("qty1",66666);
+		qtyMap.put("id",1);
+		System.out.println(qtyMap);
+
+		System.out.println("-------");
+		System.out.println(new JSONObject(qtyMap));
 	}
 }
