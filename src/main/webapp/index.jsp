@@ -13,13 +13,11 @@
 
 <h3><a href="<c:url value="/secure/login.jsp" />">Login</a></h3>
 <h3><a href="<c:url value="/pages/register/registerForm.jsp" />">MembersForm</a></h3>
-<h3><a href="<c:url value="/EndProject/ProductInfo1.jsp" />">ProductInfo1</a></h3>
-<h3><a href="<c:url value="/EndProject/ProductInfo2.jsp" />">ProductInfo2</a></h3>
-<h3><a href="<c:url value="/EndProject/ProductInfo3.jsp" />">ProductInfo3</a></h3>
-<h3><a href="<c:url value="/EndProject/ProductInfo4.jsp" />">ProductInfo4</a></h3>
-<h3><a href="<c:url value="/EndProject/NewCart.jsp" />">NewCart</a></h3>
 
-<h3><a href="<c:url value="/EndProject/KevinProductInfo.html" />">KevinProductInfo</a></h3>
+<h3><a href="<c:url value="/EndProject/KevinProductInfo.html" />">KevinProductInfo1.html</a></h3>
+<h3><a href="<c:url value="/EndProject/KevinProductInfo2.html" />">KevinProductInfo2.html</a></h3>
+<h3><a href="<c:url value="/EndProject/KevinProductInfo3.html" />">KevinProductInfo3.html</a></h3>
+<h3><a href="<c:url value="/EndProject/KevinProductInfo4.html" />">KevinProductInfo4.html</a></h3>
 <h3><a href="<c:url value="/EndProject/KevinNewCart.html" />">KevinNewCart</a></h3>
 </body>
 </html>
