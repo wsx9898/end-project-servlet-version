@@ -268,9 +268,8 @@
 	                if(res==="CharIsEmpty"){
 	                    alert("目前購物車內沒有商品")
 	                }else{
-						var res2 = res.replace(']', ',');//把陣列最後一個]先換成,之後要補]回來
-						 alert(res2 + "]");
-						console.log(res2 + "]");
+						console.log(res);
+						alert(res)
 	                }
 	            },
 	            error: function () {

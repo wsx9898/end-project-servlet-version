@@ -1,11 +1,11 @@
 package controller;
 
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.WebApplicationContext;
-
 import model.ProductBean;
 import model.ProductService;
+import org.json.JSONObject;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,14 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "CartServlet", value = "/CartServlet")
-public class CartServlet extends HttpServlet {
+public class KevinCartServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ProductService productService;
 
@@ -49,8 +47,8 @@ public class CartServlet extends HttpServlet {
         System.out.println(pdaction + " from cartServlet " + pid0);
 
         //自己測試數量
-        var qty = request.getParameter("qty");
-        System.out.println("qty=" + qty);
+        var qty0 = request.getParameter("qty");
+        System.out.println("qty=" + qty0);
 
         //驗證資料
         Map<String, String> errors = new HashMap<>();
@@ -65,6 +63,16 @@ public class CartServlet extends HttpServlet {
                 errors.put("id", "Id must be an integer");
             }
         }
+
+        int qty = 0; //如果抓不到qty就給預設qty為0
+        if (qty0 != null && qty0.length() != 0) {
+            try {
+                qty = Integer.parseInt(qty0);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                errors.put("qty", "qty must be an integer");
+            }
+        }
         ProductBean bean = new ProductBean();
         bean.setProductId(pid);
 
@@ -76,26 +84,20 @@ public class CartServlet extends HttpServlet {
             List<ProductBean> result = productService.select(bean);
 
 
-//            HashMap qtyMap = new HashMap();
-//            qtyMap.put("qty1",qty);
+            HashMap qtyMap = new HashMap();
+            qtyMap.put("qty1",qty);
+            qtyMap.put("id",pid);
 
             if(request.getSession().getAttribute("cart") != null){  //如果購物車session已存在
-                List<ProductBean> temp = (List<ProductBean>) request.getSession().getAttribute("cart"); //把session放的list拿出來
-                temp.add(result.get(0)); //把這次抓到的bean存進去
+                HashMap temp = (HashMap) request.getSession().getAttribute("cart"); //把session放的list拿出來
+                temp.put("qty1",qty);
+                temp.put("id",pid);
                 request.getSession().removeAttribute("cart"); //把舊有的購物車session移除
                 request.getSession().setAttribute("cart",temp); //把新的list存回購物車session
                 totalQTYinCart = temp.size();
 
-                //賦予數量
-
-                request.getSession().removeAttribute("qty"); //把舊有的購物車session移除
-                request.getSession().setAttribute("qty",qty); //把新的list存回購物車session
             }else{
-                request.getSession().setAttribute("cart", result); //如果購物車session不存在 就直接new一個session把list存進去
-
-                //賦予數量
-                request.getSession().setAttribute("qty",qty); //把新的list存回購物車session
-                totalQTYinCart = result.size();
+                request.getSession().setAttribute("cart", qtyMap); //如果購物車session不存在 就直接new一個session把list存進去
             }
             out.print("購物車新增成功"+totalQTYinCart);
             out.close();
@@ -126,11 +128,9 @@ public class CartServlet extends HttpServlet {
             }
         }else if (pdaction != null && pdaction.equals("cartCheckOut2")) {
             //把購物車清單從session cart抓出來
-            List<ProductBean> result = (List<ProductBean>) request.getSession().getAttribute("cart");
-            String result2 = (String)request.getSession().getAttribute("qty");
+            HashMap result = (HashMap) request.getSession().getAttribute("cart");
             if(result!=null){
-                out.println(result);
-                out.close();
+                out.println(new JSONObject(result));
             }else{
                 out.print("CharIsEmpty");
                 out.close();
