@@ -157,7 +157,6 @@
 
 		function appendItem123(){
 			console.log("ItemCnt = " + ItemCnt);
-			console.log("ItemCnt = " + ItemCnt);
 			//用這個到時候可以判斷是哪個物品要新增
 			$("#putHere").append(
 					`<tr class="classItem${ItemCnt}" id="item${ItemCnt}"><td class="image"><a class="product-image" title="Sample Product"
