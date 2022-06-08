@@ -134,19 +134,12 @@
 					alert("目前購物車內沒有商品")
 				}else{
 					console.log("res = " + res);
-					alert("res = " + res);
 					data = JSON.parse(res);
 
 
 					data.forEach(function (e) {
 						console.log("forEachWork");
-						console.log(e.productId);
-						console.log(e.qty);
-						console.log(e.productImg);
-						console.log(e.productName);
-						console.log(e.productPrice);
-//Test GitHub
-						appendItem123(e.productName,e.productPrice,e.productImg,e.qty);
+						appendItem123(e.productName,e.productPrice,e.productImg,e.qty,e.singleTotal);
 					})
 				}
 			},
@@ -156,7 +149,8 @@
 		});
 	}
 
-	function appendItem123(productName,productPrice,productImg,qty){
+	//購物車有多少項就新增幾項
+	function appendItem123(productName,productPrice,productImg,qty,singleTotal){
 		console.log("ItemCnt = " + ItemCnt);
 		//用這個到時候可以判斷是哪個物品要新增
 		$("#putHere").append(
@@ -185,7 +179,7 @@
 		);
 		//
 		$(`#item${ItemCnt}`).append(
-				`<td class="a-right movewishlist"><span class="cart-price"><span class="price"id="totalPrice${ItemCnt}">$0</span></span></td>`
+				`<td class="a-right movewishlist"><span class="cart-price"><span class="price"id="totalPrice${ItemCnt}">$${singleTotal}</span></span></td>`
 		);
 
 		$(`#item${ItemCnt}`).append(

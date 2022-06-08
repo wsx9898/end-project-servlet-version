@@ -148,7 +148,7 @@ public class CartServlet extends HttpServlet {
                     jo2.put("productPrice", bean.getProductPrice());
                     jo2.put("productImg", bean.getProductImg1());
                     jo2.put("qty", result.get(k));
-                    jo2.put("單項總額",bean.getProductPrice()*result.get(k));
+                    jo2.put("singleTotal",bean.getProductPrice()*result.get(k));
                     jarr.put(jo2);
                 }
                 out.print(jarr);
