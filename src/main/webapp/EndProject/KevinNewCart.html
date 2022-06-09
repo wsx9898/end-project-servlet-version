@@ -124,33 +124,14 @@
 	//一開始就跟servlet要求新增的購物車資訊了
 	CartCheckOut();
 
-	//按下remove會移除整項商品
-	//到時候這個要移到到new欄位的function中
-	$("#testDelete").on("click", removeSingleProducts);
 
 
 
 
 
-	function removeSingleProducts(){
-		alert("removeSingleProduct有被成功呼叫");
-		$.ajax({
-			url: "http://localhost:8080/labweb_register_0605_test_war/CartServlet",
-			method: "post",
-			data: {
-				pdaction: "removeSingleProducts",
-				//目前先移除第一項
-				editProductId: "1"
-			},
-			success: function (res) {
-				//應該印出  "此商品已完全移除，購物車內目前商品數量="+ totalQtyInCart
-				alert(res);
-			},
-			error: function () {
-				alert("cart error");
-			}
-		});
-	};
+
+
+
 
 
 
@@ -182,7 +163,7 @@
 
 					data.forEach(function (e) {
 						console.log("forEachWork");
-						appendItem123(e.productName,e.productPrice,e.productImg,e.qty,e.singleTotal);
+						appendItem123(e.productName,e.productPrice,e.productImg,e.qty,e.singleTotal,e.productId);
 					})
 				}
 			},
@@ -193,7 +174,7 @@
 	}
 
 	//購物車有多少項就新增幾列
-	function appendItem123(productName,productPrice,productImg,qty,singleTotal){
+	function appendItem123(productName,productPrice,productImg,qty,singleTotal,id){
 		console.log("ItemCnt = " + ItemCnt);
 		//用這個到時候可以判斷是哪個物品要新增
 		$("#putHere").append(
@@ -226,12 +207,34 @@
 		);
 
 		$(`#item${ItemCnt}`).append(
-				`<td class="a-center last"><a id="remove${ItemCnt}" class="button remove" title="Remove item">
-        <span><span>Remove item</span></span></a></td>`
+				//按下remove會移除整項商品
+				`<td class="a-center last"><button id="remove${ItemCnt}" class="button remove" title="Remove item" onclick="removeSingleProducts(${id})">
+        <span>Remove item</span></button></td>`
 		);
 		ItemCnt++;
 	}
 	//購物車有多少項就新增幾列
+
+	//按下移除按鈕會送ID到後端把此session中此商品全部移除
+	function removeSingleProducts(id){
+		$.ajax({
+			url: "http://localhost:8080/labweb_register_0605_test_war/CartServlet",
+			method: "post",
+			data: {
+				pdaction: "removeSingleProducts",
+				//創出來的按鈕一開始就知道自己要傳的removeSingleProducts(id)是多少
+				editProductId: `${id}`
+			},
+			success: function (res) {
+				//應該印出  "此商品已完全移除，購物車內目前商品數量="+ totalQtyInCart
+				// alert(res);
+				alert("商品已移除");
+			},
+			error: function () {
+				alert("cart error");
+			}
+		});
+	};
 </script>
 
 
