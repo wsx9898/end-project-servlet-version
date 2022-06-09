@@ -93,7 +93,7 @@
 			</form>
 		</div>
 		<tr>
-			<button class="appendItem btn btn-warning" id="here">測試新增商品</button>
+			<button class="appendItem123 btn btn-warning" id="testDelete">測試刪除商品</button>
 		</tr>
 	</div>
 
@@ -117,12 +117,55 @@
 
 
 <script type="text/javascript">
+	//要從商品頁拿到的購物資訊
 	var data;
 	//給新增購物欄位使用的
 	var ItemCnt = 1;
+	//一開始就跟servlet要求新增的購物車資訊了
 	CartCheckOut();
 
-	//一開始就跟servlet要求新增的購物車了
+	//按下remove會移除整項商品
+	//到時候這個要移到到new欄位的function中
+	$("#testDelete").on("click", removeSingleProducts);
+
+
+
+
+
+	function removeSingleProducts(){
+		alert("removeSingleProduct有被成功呼叫");
+		$.ajax({
+			url: "http://localhost:8080/labweb_register_0605_test_war/CartServlet",
+			method: "post",
+			data: {
+				pdaction: "removeSingleProducts",
+				//目前先移除第一項
+				editProductId: "1"
+			},
+			success: function (res) {
+				//應該印出  "此商品已完全移除，購物車內目前商品數量="+ totalQtyInCart
+				alert(res);
+			},
+			error: function () {
+				alert("cart error");
+			}
+		});
+	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//一開始就跟servlet要求新增的購物車資訊了
 	function CartCheckOut() {
 		$.ajax({
 			url: "http://localhost:8080/labweb_register_0605_test_war/CartServlet",
@@ -137,7 +180,6 @@
 					console.log("res = " + res);
 					data = JSON.parse(res);
 
-
 					data.forEach(function (e) {
 						console.log("forEachWork");
 						appendItem123(e.productName,e.productPrice,e.productImg,e.qty,e.singleTotal);
@@ -150,7 +192,7 @@
 		});
 	}
 
-	//購物車有多少項就新增幾項
+	//購物車有多少項就新增幾列
 	function appendItem123(productName,productPrice,productImg,qty,singleTotal){
 		console.log("ItemCnt = " + ItemCnt);
 		//用這個到時候可以判斷是哪個物品要新增
@@ -184,12 +226,12 @@
 		);
 
 		$(`#item${ItemCnt}`).append(
-				`<td class="a-center last"><a id="remove1" class="button remove" title="Remove item" href="#">
+				`<td class="a-center last"><a id="remove${ItemCnt}" class="button remove" title="Remove item">
         <span><span>Remove item</span></span></a></td>`
 		);
-
 		ItemCnt++;
 	}
+	//購物車有多少項就新增幾列
 </script>
 
 

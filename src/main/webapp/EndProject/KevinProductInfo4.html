@@ -139,14 +139,13 @@
                                                     <div class="pull-left">
                                                         <div class="custom pull-left">
                                                             <button
-                                                                    onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;"
+                                                                    onClick="minus()"
                                                                     class="reduced items-count" type="button">
                                                                 <i class="fa fa-minus">&nbsp;</i>
                                                             </button>
-                                                            <input type="text" class="input-text qty" title="Qty"
-                                                                   value="1" maxlength="12" id="qty" name="qty">
+                                                            <input type="text" value="1" class="input-text qty" title="Qty" maxlength="12" id="qty" name="qty">
                                                             <button
-                                                                    onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;"
+                                                                    onClick="plus()"
                                                                     class="increase items-count" type="button">
                                                                 <i class="fa fa-plus">&nbsp;</i>
                                                             </button>
@@ -914,14 +913,32 @@
 <!-- JavaScript -->
 
 <script>
+    //購物車數量的增減按鈕
+    function minus() {
+        var result = document.getElementById('qty');
+        var qty = result.value;
+        if (!isNaN(qty) && qty != 0) result.value--;
+        // return false;
+    };
+
+    function plus() {
+        var result = document.getElementById('qty');
+        var qty = result.value;
+        if( !isNaN( qty )) result.value++;
+        // return false;
+    };
+    //購物車數量的增減按鈕
+
+
     //設定一個全域變數
     var productID;
+    //選取商品的數量
+    var productQty;
 
-    var productQty = $("#qty").val();
 
     //Ted的方法，透過遠端載入所有圖片跟標題
     var settings = {
-        "url": "http://bosian.ddns.net:8080/IIIFinalServlet_war_exploded/ProductServlet?pdaction=Select1&editProductId=49",
+        "url": "http://bosian.ddns.net:8080/IIIFinalServlet_war_exploded/ProductServlet?pdaction=Select1&editProductId=52",
         "method": "POST",
         "timeout": 0,
     };
@@ -956,16 +973,9 @@
 
     //加入購物車按鈕
     $("#addToCart").on("click", function () {
-        alert("productQty = " + productQty);
+        productQty = $("#qty").val();
         addProductToCart(productID);
     })
-
-
-    //這是測試按鈕確認有載入資料
-    $("#change2").on("click", function () {
-        //留著測資料
-    })
-    //這是測試按鈕確認有載入資料
 
 
     //呼叫CartServlet加入購物車
@@ -986,15 +996,20 @@
                 alert(res);
                 //這是Ted購物車上面會顯示數量
                 var qtyOfCart = response.toString().substring(7, 8);
-                console.log(qtyOfCart);
+                // console.log("qtyOfCart = " + qtyOfCart);
             },
             error: function () {
                 alert("cart error");
             }
         });
+
     }
 
-    //現在在html裡面呼叫這個方法帶入1
+    //這是測試按鈕確認有載入資料
+    $("#change2").on("click", function () {
+        //留著測資料
+    })
+    //這是測試按鈕確認有載入資料
 
 </script>
 <script src="js/jquery.min.js"></script>
@@ -1003,6 +1018,6 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/jquery.mobile-menu.min.js"></script>
 <script src="js/cloud-zoom.js"></script>
-<script src="./self.js"></script>
+<script src="js/star.js"></script>
 </body>
 </html>

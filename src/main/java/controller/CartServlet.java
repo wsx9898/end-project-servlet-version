@@ -116,6 +116,23 @@ public class CartServlet extends HttpServlet {
             totalQtyInCart = totalQTYinCart(temp);
             out.print(output + totalQtyInCart);
             out.close();
+        }else if (pdaction != null && pdaction.equals("removeSingleProducts")) {
+            HashMap<Integer, Integer> temp = (HashMap<Integer, Integer>) request.getSession().getAttribute("cart"); //把session存放的map拿出來
+            String output = "購物車內並沒有此商品";
+            if (temp.get(productId) != null) {
+                //如果此商品數量大於1 直接把產品從map移除
+                if (temp.get(productId) > 0) {
+                    temp.remove(productId);
+                } else {
+                    out.print("完全移除商品有誤");
+                }
+                output = "此商品已完全移除，購物車內目前商品數量=";
+            }
+            request.getSession().removeAttribute("cart"); //把舊有的購物車session移除
+            request.getSession().setAttribute("cart", temp); //把新的Map存回購物車session
+            totalQtyInCart = totalQTYinCart(temp);
+            out.print(output + totalQtyInCart);
+            out.close();
         } else if (pdaction != null && pdaction.equals("cartCheckOut")) {
             //TODO 這段基本上可以刪除 前端按鈕點下去後直接跳轉check out就好 但是memberId的attr傳遞要改寫
             //把購物車清單從session cart抓出來
