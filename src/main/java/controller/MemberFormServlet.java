@@ -24,9 +24,9 @@ import org.springframework.web.context.WebApplicationContext;
 import model.MembersService;
 import model.MembersBean;
 
-
+//要移去controller
 @WebServlet(
-		urlPatterns={"/pages/register/registerForm.controller"}		
+		urlPatterns={"/pages/register/registerForm.controller"}
 )
 public class MemberFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -259,7 +259,7 @@ public class MemberFormServlet extends HttpServlet {
 		bean.setUpdateDate(updateDate);
 
 		
-//根據Model執行結果導向View
+		//根據Model執行結果導向View
 		if(prodaction!=null && prodaction.equals("Select")) {
 			List<MembersBean> result = membersService.select(bean);
 			request.setAttribute("select", result);
