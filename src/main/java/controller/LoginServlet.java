@@ -1,26 +1,23 @@
 package controller;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import model.CustomerBean;
+import model.CustomerService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
-import javax.security.auth.login.AppConfigurationEntry;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.WebApplicationContext;
-
-import model.CustomerBean;
-import model.CustomerService;
-@WebServlet(
-		urlPatterns={"/secure/login.controller"}		
-)
+//@WebServlet(
+//		urlPatterns={"/secure/login.controller"}
+//)
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

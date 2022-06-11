@@ -25,12 +25,12 @@ import model.MembersService;
 import model.MembersBean;
 
 //要移去controller
-@WebServlet(
-		urlPatterns={"/pages/register/registerForm.controller"}
-)
+//@WebServlet(
+//		urlPatterns={"/pages/register/registerForm.controller"}
+//)
 public class MemberFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 			.format(Calendar.getInstance().getTime());
@@ -62,11 +62,11 @@ public class MemberFormServlet extends HttpServlet {
 		String updateUserTemp = request.getParameter("updateUser");
 		String updateDateTemp = request.getParameter("updateDate");
 		String prodaction = request.getParameter("prodaction");
-		
+
 //驗證資料
 		Map<String, String> errors = new HashMap<String, String>();
 		request.setAttribute("errors", errors);
-		
+
 		if(prodaction!=null) {
 			if(prodaction.equals("Insert") || prodaction.equals("Update") || prodaction.equals("Delete")) {
 				if(memberIdTemp==null || memberIdTemp.length()==0) {
@@ -83,7 +83,7 @@ public class MemberFormServlet extends HttpServlet {
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 				System.out.println("memberId must be an integer");
-				errors.put("memberId", "memberId must be an integer");	
+				errors.put("memberId", "memberId must be an integer");
 			}
 		}
 //		String memberAccouuntTemp = request.getParameter("memberAccouunt");
@@ -137,7 +137,7 @@ public class MemberFormServlet extends HttpServlet {
 			}
 		}else {
 			errors.put("memberFirstname", "名字不可以為空值");
-		}	
+		}
 //		String memberGenderTemp = request.getParameter("memberGender");
 		String memberGender = "";
 		if(memberGenderTemp!=null && memberGenderTemp.length()!=0) {
@@ -162,14 +162,14 @@ public class MemberFormServlet extends HttpServlet {
 		}
 //		String memberEmailTemp = request.getParameter("memberEmail");
 		String memberEmail = "";
-		if(memberEmailTemp!=null && memberEmailTemp.length()!=0) {		
+		if(memberEmailTemp!=null && memberEmailTemp.length()!=0) {
 			if(patternMatches(memberEmailTemp)) {
 				memberEmail = memberEmailTemp;
 			}
 			else {
 				System.out.println("please input valid Email address!!!");
 				errors.put("memberEmail", "Email必須是有效的格式");
-			}		
+			}
 		}else {
 			errors.put("memberEmail", "Email為必填欄位");
 		}
@@ -214,14 +214,14 @@ public class MemberFormServlet extends HttpServlet {
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 				System.out.println("電話號碼必須是數字");
-				errors.put("memberTel", "memberTel must be a number");	
+				errors.put("memberTel", "memberTel must be a number");
 			}
 		}
 //		String memberBirthTemp = request.getParameter("memberBirth");
 		java.util.Date memberBirth = new Date(82, 8, 11);
 		if(memberBirthTemp!=null && memberBirthTemp.length()!=0) {
 			try {
-				memberBirth = sFormat.parse(memberBirthTemp);			
+				memberBirth = sFormat.parse(memberBirthTemp);
 			} catch (ParseException e) {
 				e.printStackTrace();
 				errors.put("memberBirth", "日期格式必須為YYYY-MM-DD");
@@ -229,18 +229,18 @@ public class MemberFormServlet extends HttpServlet {
 		}
 //		String createDateTemp = request.getParameter("createDate");
 		java.util.Date createDate = Calendar.getInstance().getTime();
-		
+
 //		String updateDateTemp = request.getParameter("updateDate");
 		java.util.Date updateDate = Calendar.getInstance().getTime();
-		
+
 		//有錯誤，再丟入填寫頁面顯示
 		if(errors!=null && !errors.isEmpty()) {
 			System.out.println("有錯誤，再丟入填寫頁面顯示");
 			request.getRequestDispatcher(
-					"/pages/register/registerForm.jsp").forward(request, response);			
-			return;		
+					"/pages/register/registerForm.jsp").forward(request, response);
+			return;
 		}
-//呼叫Model	
+//呼叫Model
 		MembersBean bean = new MembersBean();
 		bean.setMemberId(memberId);
 		bean.setMemberAccouunt(memberAccouunt);
@@ -258,7 +258,7 @@ public class MemberFormServlet extends HttpServlet {
 		bean.setUpdateUser(updateUser);
 		bean.setUpdateDate(updateDate);
 
-		
+
 		//根據Model執行結果導向View
 		if(prodaction!=null && prodaction.equals("Select")) {
 			List<MembersBean> result = membersService.select(bean);
@@ -293,11 +293,11 @@ public class MemberFormServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		this.doGet(req, resp);
-	}	
+	}
 	//Email Regex Function
 	public static boolean patternMatches(String emailAddress) {
 		String regexPattern = "^(.+)@(\\S+)$";
 	    return Pattern.compile(regexPattern).matcher(emailAddress).matches();
 	}
-	
+
 }

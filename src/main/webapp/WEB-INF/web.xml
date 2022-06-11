@@ -40,12 +40,13 @@
 			<!--想特別改名才要有這行-->
 			<init-param>
 				<param-name>contextConfigLocation</param-name>
-				<param-value>/WEB-INF/mvc-servlet.xml</param-value>
+				<param-value>/WEB-INF/spring.mvc.xml</param-value>
 			</init-param>
 			<load-on-startup>1</load-on-startup>
 		</servlet>
 		<servlet-mapping>
 			<servlet-name>DispatcherServlet</servlet-name>
+	<!--使用/設定的Servlet屬於第四呼叫順位，只有在其他所有Servlet都不符合才會被被Container呼叫-->
 			<url-pattern>/</url-pattern>
 		</servlet-mapping>
 	<!--	嘗試轉成MVC		-->

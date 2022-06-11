@@ -1,27 +1,29 @@
 package controller;
 
-import model.CustomerBean;
-import model.CustomerService;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import model.CustomerBean;
+import model.CustomerService;
 
 @Controller
 public class LoginController {
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private MessageSource messageSource;
-	
-//	@RequestMapping(path = {"/secure/login.controller"})
+
+	@RequestMapping(path = {"/secure/login.controller"})
 	public String handlerMethod(Locale locale, Model model, String username, String password, HttpSession session) {
 //接收資料
 //驗證資料
@@ -38,7 +40,7 @@ public class LoginController {
 		if(errors!=null && !errors.isEmpty()) {
 			return "/secure/login";
 		}
-		
+
 //呼叫model
 		CustomerBean bean = customerService.login(username, password);
 
@@ -50,6 +52,5 @@ public class LoginController {
 			session.setAttribute("user", bean);
 			return "redirect:/";
 		}
-		
 	}
 }
